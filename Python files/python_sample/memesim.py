@@ -41,10 +41,10 @@ def setup():
 def process_response(resp):
     if resp.cmdtype() == 'rq':
         if not resp.iserror():
-            robot_id = int(resp.cmdargs()[1])
-            xpos = float(resp.cmdargs()[2])
-            ypos = float(resp.cmdargs()[3])
-            angle = float(resp.cmdargs()[4])
+            robot_id = int(float(resp.cmdargs()[1]))
+            xpos = int(float(resp.cmdargs()[2]))
+            ypos = int(float(resp.cmdargs()[3]))
+            angle = int(float(resp.cmdargs()[4]))
     print("Received response: " + str(resp))
 
 # this function is called over and over again
@@ -54,37 +54,37 @@ def loop():
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21   
         RQ1 = MemeSimCommand.RQ(8, robotID)        
     elif command == "mq":
         print("Query with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21   
         print("For what group size?")
-        group_size = float(input())
+        group_size = int(input())
         RQ1 = MemeSimCommand.MQ(8, robotID, group_size)           
     elif command == "ip":
         print("Interview person with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21   
         print("Which person do you want to interview?")
         individualID = input()
         RQ1 = MemeSimCommand.IP(8, robotID, group_size)                   
     elif command == "pi":
         print("Process interview with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21   
         print("Which person was interviewed?")
         individualID = input()
         RQ1 = MemeSimCommand.PI(8, robotID, group_size)                    
     elif command == "tm":
         print("Test meme with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21   
         print("What is the genome of the meme you want to test?")
         meme_genome = input()        
         print("Which person do you want to test on?")
         individualID = input()        
         RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID)                   
     elif command == "pc":
-        print("Process campain with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        print("Process campaign with which robot? 1(henk)/2(ingrid)/3(joke)")
+        robotID = int(input())+21   
         print("What do you want to call the meme?")
         meme_name = input()
         print("What is the genome of the meme?")
@@ -92,7 +92,7 @@ def loop():
         RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)                   
     elif command == "lc":
         print("Launch campain with which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21
         print("What meme do you want to launch?") #optie voor later: print lijst met alle memes
         meme_name = input()
         print("What is the budget?")
@@ -106,7 +106,7 @@ def loop():
         RQ1 = MemeSimCommand.DB(8, debug_command)                   
     elif command == "rs":
         print("Set location of which robot? 1(henk)/2(ingrid)/3(joke)")
-        robotID = float(input())+21   
+        robotID = int(input())+21
         print("At which x_position? (in mm)")
         x_pos = input()
         print("At which y_position? (in mm)")
