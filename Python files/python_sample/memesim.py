@@ -45,12 +45,20 @@ def process_response(resp):
             xpos = int(float(resp.cmdargs()[2]))
             ypos = int(float(resp.cmdargs()[3]))
             angle = int(float(resp.cmdargs()[4]))
+    if resp.cmdtype() == 'pi':
+        if not resp.iserror():
+            robot_id = int(float(resp.cmdargs()[1]))
+            individualID_genome = resp.cmdargs()[2]
+            individualID = individualID_genome[0]
+            genome = individualID_genome[1]
+            print(individualID)
+            print(genome)            
     print("Received response: " + str(resp))
 
 # this function is called over and over again
 def loop():
     error = 0
-    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs)")
+    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)/3(joke)")
@@ -114,6 +122,8 @@ def loop():
         print("At what angle?")
         angle = input()
         RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
+    elif command == "q":
+            exit()
     else:
         print("error")
         error = 1                
