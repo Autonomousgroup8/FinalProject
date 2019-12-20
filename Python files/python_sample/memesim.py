@@ -73,7 +73,7 @@ def loop():
         robotID = int(input())+21   
         print("Which person was interviewed?")
         individualID = input()
-        RQ1 = MemeSimCommand.PI(8, robotID, group_size)                    
+        RQ1 = MemeSimCommand.PI(8, robotID, individualID)
     elif command == "tm":
         print("Test meme with which robot? 1(henk)/2(ingrid)/3(joke)")
         robotID = int(input())+21   
