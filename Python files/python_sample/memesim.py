@@ -67,7 +67,7 @@ def loop():
         robotID = int(input())+21   
         print("Which person do you want to interview?")
         individualID = input()
-        RQ1 = MemeSimCommand.IP(8, robotID, group_size)                   
+        RQ1 = MemeSimCommand.IP(8, robotID, individualID)
     elif command == "pi":
         print("Process interview with which robot? 1(henk)/2(ingrid)/3(joke)")
         robotID = int(input())+21   
@@ -111,7 +111,9 @@ def loop():
         x_pos = input()
         print("At which y_position? (in mm)")
         y_pos = input()
-        RQ1 = MemeSimCommand.RS(8)   
+        print("At what angle?")
+        angle = input()
+        RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
     else:
         print("error")
         error = 1                
