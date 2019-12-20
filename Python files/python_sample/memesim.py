@@ -20,6 +20,8 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 # dictionary to hold a collection of memes
 MY_MEMES = dict()
 
+CityIDGen = []
+city = 1
 
 # the setup function is called once at startup
 # you can put initialization code here
@@ -50,7 +52,9 @@ def process_response(resp):
             robot_id = int(float(resp.cmdargs()[1]))
             individualID_genome = resp.cmdargs()[2]
             individualID = individualID_genome[0]
-            genome = individualID_genome[1]         
+            genome = individualID_genome[1]
+            CityIDGen += [[city, individualID, genome]]
+            print(CityIDGen)
     print("Received response: " + str(resp))
 
 # this function is called over and over again
@@ -62,7 +66,7 @@ def loop():
         print("location of which robot? 1(henk)/2(ingrid)/3(joke)")
         robotID = int(input())+21   
         RQ1 = MemeSimCommand.RQ(8, robotID)        
-    elif command == "mq":
+    elif command == "mq": # need to store city number
         print("Query with which robot? 1(henk)/2(ingrid)/3(joke)")
         robotID = int(input())+21   
         print("For what group size?")
@@ -74,7 +78,7 @@ def loop():
         print("Which person do you want to interview?")
         individualID = int(float(input()))
         RQ1 = MemeSimCommand.IP(8, robotID, individualID)                   
-    elif command == "pi":
+    elif command == "pi": # need to store city number
         print("Process interview with which robot? 1(henk)/2(ingrid)/3(joke)")
         robotID = int(input())+21   
         print("Which person was interviewed?")
