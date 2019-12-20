@@ -5,7 +5,7 @@ from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
-
+from averageString import getAverage
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
@@ -136,6 +136,5 @@ while True:
 
     # call the loop function
     loop()
-
     # slow the loop down
     sleep(2.0)
