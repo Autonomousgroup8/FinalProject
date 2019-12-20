@@ -50,9 +50,7 @@ def process_response(resp):
             robot_id = int(float(resp.cmdargs()[1]))
             individualID_genome = resp.cmdargs()[2]
             individualID = individualID_genome[0]
-            genome = individualID_genome[1]
-            print(individualID)
-            print(genome)            
+            genome = individualID_genome[1]         
     print("Received response: " + str(resp))
 
 # this function is called over and over again
