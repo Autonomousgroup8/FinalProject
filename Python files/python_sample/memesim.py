@@ -129,7 +129,6 @@ setup()
 while True:
     # get new responses
     RESPONSES = MEMESIM_CLIENT.new_responses()
-
     # process new responses
     for r in RESPONSES:
         process_response(r)
