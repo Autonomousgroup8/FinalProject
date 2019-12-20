@@ -111,7 +111,9 @@ def loop():
         x_pos = input()
         print("At which y_position? (in mm)")
         y_pos = input()
-        RQ1 = MemeSimCommand.RS(8)   
+        print("At what angle?")
+        angle = input()
+        RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
     else:
         print("error")
         error = 1                

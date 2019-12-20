@@ -4,7 +4,7 @@ class MemeSimCommand(object):
 
     ''' MemeSimCommand represents a command to be sent to the simulator '''
 
-    CommandList = ['rq', 'mq', 'ip', 'pi', 'tm', 'pc', 'lc', 'ca', 'db']
+    CommandList = ['rq', 'mq', 'ip', 'pi', 'tm', 'pc', 'lc', 'ca', 'db','rs']
 
     def __init__(self, cmdtype, cmdargs):
         if not cmdtype in MemeSimCommand.CommandList:
