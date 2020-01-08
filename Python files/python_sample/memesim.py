@@ -148,3 +148,4 @@ while True:
     # call the loop function
     loop()
     # slow the loop down
+    sleep(2.0)
