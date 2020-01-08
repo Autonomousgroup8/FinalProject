@@ -20,7 +20,7 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 # dictionary to hold a collection of memes
 MY_MEMES = dict()
 
-CityIDGen = []
+global CityIDGen
 city = 1
 
 # the setup function is called once at startup
