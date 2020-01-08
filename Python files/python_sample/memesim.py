@@ -20,7 +20,7 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 # dictionary to hold a collection of memes
 MY_MEMES = dict()
 
-CityIDGen = []
+global CityIDGen
 city = 1
 
 # the setup function is called once at startup
@@ -60,7 +60,7 @@ def process_response(resp):
 # this function is called over and over again
 def loop():
     error = 0
-    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q)")
+    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q/print_ind)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
@@ -125,7 +125,11 @@ def loop():
         angle = input()
         RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
     elif command == "q":
-            exit()
+        exit()
+    elif command == "print_ind":
+        print(CityIDGen)
+        error = 1
+
     else:
         print("error")
         error = 1                
@@ -149,3 +153,4 @@ while True:
     loop()
     # slow the loop down
     sleep(2.0)
+
