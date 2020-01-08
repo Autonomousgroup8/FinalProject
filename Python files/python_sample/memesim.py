@@ -152,8 +152,5 @@ while True:
     # call the loop function
     loop()
     # slow the loop down
-<<<<<<< HEAD
     sleep(2.0)
 
-=======
->>>>>>> bcfba3b60f7c2ed29f80f5b711bb62d0927b0e3e
