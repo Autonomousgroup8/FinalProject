@@ -6,4 +6,3 @@ def find_mapping(gen1,gen2):
         mappings[i] = gen2[temp_ind]
     return mappings
 
-def find_average():
