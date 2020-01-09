@@ -22,7 +22,7 @@ MY_MEMES = dict()
 
 sleep_length = 2.0
 
-global CityIDGen
+CityIDGen = []
 city = 1
 
 # the setup function is called once at startup
@@ -51,6 +51,7 @@ def process_response(resp):
             angle = int(float(resp.cmdargs()[4]))
     if resp.cmdtype() == 'pi':
         if not resp.iserror():
+            global CityIDGen
             robot_id = int(float(resp.cmdargs()[1]))
             individualID_genome = resp.cmdargs()[2]
             individualID = individualID_genome[0]
