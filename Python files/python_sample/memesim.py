@@ -20,6 +20,8 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 # dictionary to hold a collection of memes
 MY_MEMES = dict()
 
+sleep_length = 2.0
+
 global CityIDGen
 city = 1
 
@@ -60,7 +62,7 @@ def process_response(resp):
 # this function is called over and over again
 def loop():
     error = 0
-    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q)")
+    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q/print_ind)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
@@ -71,7 +73,8 @@ def loop():
         robotID = int(input())+14   
         print("For what group size?")
         group_size = int(input())
-        RQ1 = MemeSimCommand.MQ(8, robotID, group_size)           
+        RQ1 = MemeSimCommand.MQ(8, robotID, group_size)
+        print(RQ1.asstring)
     elif command == "ip":
         print("Interview person with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -99,7 +102,7 @@ def loop():
         meme_name = input()
         print("What is the genome of the meme?")
         meme_genome = input()         
-        RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)                   
+        RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
     elif command == "lc":
         print("Launch campain with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14
@@ -125,7 +128,15 @@ def loop():
         angle = input()
         RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
     elif command == "q":
-            exit()
+        exit()
+    elif command == "print_ind":
+        print(CityIDGen)
+        error = 1
+    elif command == "litt":
+        print("Geef input")
+        testcmd = input()
+        exec(testcmd)
+        error = 1
     else:
         print("error")
         error = 1                
@@ -148,4 +159,5 @@ while True:
     # call the loop function
     loop()
     # slow the loop down
-    sleep(2.0)
+
+    sleep(sleep_length)

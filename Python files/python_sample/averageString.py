@@ -6,6 +6,7 @@ def getAverage(strings,length = 100):
         for i in range(len(strings)):
                 tempGen += strings[i][j]
         mostCommonString += (coll.Counter(tempGen).most_common(1))[0][0]
+        tempGen = ""
     return mostCommonString
 
 
