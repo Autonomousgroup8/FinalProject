@@ -57,11 +57,13 @@ def process_response(resp):
             individualID = individualID_genome[0]
             genome = individualID_genome[1]
             CityIDGen += [[city, individualID, genome]]
-            print(CityIDGen)
+#            print(CityIDGen)
     print("Received response: " + str(resp))
 
 # this function is called over and over again
 def loop():
+    global CityIDGen
+    global city
     error = 0
     print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q/print_ind)")
     command = input()
