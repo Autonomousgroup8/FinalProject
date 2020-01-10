@@ -22,7 +22,8 @@ MY_MEMES = dict()
 
 sleep_length = 2.0
 
-CityIDGen = []
+CityIDGen = [[1, '1199037', 'GCTGGTCTCTGTAATTAGCGTTATTCGTTTAACCCGTTTGAAATATCGGTGGCAAGATAGAGCCCCTGAGGGGGAGACCAATGCGCACTAAACCCGCCAA'], [1, '1199287', 'GCTTTAATGAGAGAGGTGCGTAACTCTGCAAGGGGTTCAAAATCCTTGGTGCTATTAGATCAGCTAGAAAAGGGGGTCAAAAACCCAAAGCGCACCTCAT']]
+
 city = 1
 
 # the setup function is called once at startup
@@ -49,6 +50,8 @@ def process_response(resp):
             xpos = int(float(resp.cmdargs()[2]))
             ypos = int(float(resp.cmdargs()[3]))
             angle = int(float(resp.cmdargs()[4]))
+            location_robot = [xpos, ypos, angle]
+            print(location_robot)
     if resp.cmdtype() == 'pi':
         if not resp.iserror():
             global CityIDGen
@@ -77,7 +80,6 @@ def loop():
         print("For what group size?")
         group_size = int(input())
         RQ1 = MemeSimCommand.MQ(8, robotID, group_size)
-        print(RQ1.asstring)
     elif command == "ip":
         print("Interview person with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -139,6 +141,21 @@ def loop():
         print("Geef input")
         testcmd = input()
         exec(testcmd)
+        error = 1
+    elif command == "dump":
+        print("Printing meme genome")
+        error = 1
+
+    elif command == "avg":
+        print("Welke stad?")
+        citynr = int(input())
+        genomes_to_send = []
+        for i in range(len(CityIDGen)):
+            if CityIDGen[i][0] == citynr:
+                genomes_to_send += [CityIDGen[i][2]]
+        print(genomes_to_send)
+        averageGenome = getAverage(genomes_to_send)
+        print(averageGenome)
         error = 1
     else:
         print("error")

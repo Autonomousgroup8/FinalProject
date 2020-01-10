@@ -10,5 +10,5 @@ def getAverage(strings,length = 100):
     return mostCommonString
 
 
-testString = ["AAAA","BBBB","DDAD","ABCD"]
-print(getAverage(testString, 4))
+#testString = ["AAAA","BBBB","DDAD","ABCD"]
+#print(getAverage(testString, 4))
