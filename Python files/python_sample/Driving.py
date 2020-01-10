@@ -1,4 +1,5 @@
 import math as math
+import time
 from time import sleep
 from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
@@ -40,12 +41,12 @@ def GetPosition(robotID):
             if not resp.iserror():
                 xpos = int(float(resp.cmdargs()[2]))
                 ypos = int(float(resp.cmdargs()[3]))
-                angle = int(float(resp.cmdargs()[4]))
+                angle1 = int(float(resp.cmdargs()[4]))
 
                 global angle, pos
-                angle = angle
+                angle = angle1
                 pos = [xpos, ypos]
-                return [xpos, ypos], angle
+                return [xpos, ypos], angle1
     return
 
 def GetInstruction(RobotID, target):
@@ -86,19 +87,19 @@ def SendInstruction(RobotID, instruction):
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
 
-    time = 0
     endtime = 0
     instruction = " "
 
     while instruction[0] != "S":
-        if endtime + 1 < time:
+        Time = time.time()
+        if endtime + 1 < Time:
             print([round(pos[0], 1), round(pos[1], 1)], round(angle, 1))
             instruction = GetInstruction(RobotID, target)
             if instruction != "NULL":
                 if instruction[0] == "F":
-                    endtime = time + distances[int(instruction[-1:])] / 10
+                    endtime = Time + distances[int(instruction[-1:])] / 10
                 elif instruction[0] != "S":
-                    endtime = time + angles[int(instruction[-1:])] / 10
+                    endtime = Time + angles[int(instruction[-1:])] / 10
                 SendInstruction(RobotID, instruction)
             else:
                 print("Error retrieving instruction")
@@ -108,6 +109,8 @@ RobotID = 1
 pos = [0, 0]
 angle = 0
 
-target = [1000, 200]
+target = Locations.Lab8
 
-GuideTo(RobotID, target)
+print(GetPosition(RobotID))
+
+#GuideTo(RobotID, target)
