@@ -1,4 +1,5 @@
 import math as math
+from time import sleep
 from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
@@ -29,6 +30,9 @@ MEMESIM_CLIENT.connect()
 def GetPosition(robotID):
     RQ1 = MemeSimCommand.RQ(8, robotID+21)
     MEMESIM_CLIENT.send_command(RQ1)
+
+    sleep(2.0)
+
     resp = MEMESIM_CLIENT.new_responses()
 
     if resp.cmdtype() == 'rq':
@@ -36,8 +40,9 @@ def GetPosition(robotID):
             xpos = int(float(resp.cmdargs()[2]))
             ypos = int(float(resp.cmdargs()[3]))
             angle = int(float(resp.cmdargs()[4]))
+            return [xpos, ypos], angle
 
-    return [xpos, ypos], angle
+    return
 
 def GetPos():
     global angle, pos
@@ -78,7 +83,7 @@ def GetInstruction(RobotID, target):
     return "NULL"
 
 def SendInstruction(RobotID, instruction):
-    print("Send Instruction: " + RobotID + instruction)
+    print("Send Instruction: " + str(RobotID) + instruction)
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
@@ -116,11 +121,13 @@ def GuideTo(RobotID, target):
         time = time + delta_t
 
 # Init position
-RobotID = 1;
+RobotID = 1
 pos = [0, 0]
 angle = 0
 
 #target = [math.sqrt(0.5*1000**2) , math.sqrt(0.5*1000**2) ]
 target = [1000, 200]
 
-GuideTo(RobotID, target)
+print(GetPosition(1))
+
+#GuideTo(RobotID, target)
