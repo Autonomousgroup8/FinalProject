@@ -49,7 +49,7 @@ TEAM_NUMBER = 8
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
 
-ZIGBEE = Zigbee('COM6', 9600)
+ZIGBEE = Zigbee('COM20', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
@@ -111,8 +111,8 @@ def GetInstruction(RobotID, target):
 
 def SendInstruction(RobotID, instruction):
     ReveiverID = [5, 6][RobotID-1]
-    print("Send Instruction: " + str(ReveiverID) + instruction)
-    ZIGBEE.write(bytes(str(ReveiverID) + instruction))
+    print("Send Instruction: " + "1" + str(ReveiverID) + instruction)
+    ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
