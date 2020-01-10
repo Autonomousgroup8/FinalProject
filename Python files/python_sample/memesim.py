@@ -23,7 +23,7 @@ MY_MEMES = []
 
 sleep_length = 2.0
 
-CityIDGen = [[1, '1199037', 'GCTGGTCTCTGTAATTAGCGTTATTCGTTTAACCCGTTTGAAATATCGGTGGCAAGATAGAGCCCCTGAGGGGGAGACCAATGCGCACTAAACCCGCCAA'], [1, '1199287', 'GCTTTAATGAGAGAGGTGCGTAACTCTGCAAGGGGTTCAAAATCCTTGGTGCTATTAGATCAGCTAGAAAAGGGGGTCAAAAACCCAAAGCGCACCTCAT']]
+CityIDGen = []
 CityID = []
 city = 1
 # the setup function is called once at startup
@@ -68,16 +68,18 @@ def process_response(resp):
             robot_id = int(float(resp.cmdargs()[1]))
             group_size = int(float(resp.cmdargs()[2]))
             for i in range(group_size):
-                individualID+= [resp.cmdargs()[i+3]]
+                individualID+= [resp.cmdargs()[i+3]][0]
                 CityID += [[city, individualID[i]]] 
                 RQ1 = MemeSimCommand.IP(8, robot_id, individualID[i])
-                MEMESIM_CLIENT.send_command(RQ1)     
+                MEMESIM_CLIENT.send_command(RQ1) 
+            print(CityID)                   
 #            print(CityIDGen)   
     print("Received response: " + str(resp))
 
 # this function is called over and over again
 def loop():
     global CityIDGen
+    global CityID
     global city
     global MY_MEMES
     error = 0
@@ -108,7 +110,7 @@ def loop():
         print("In which city are you?")
         city = int(input())        
         RQ1 = MemeSimCommand.MQ(8, robotID, group_size)
-        
+     
     elif command == "pi": # need to store city number
         print("Process interview with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -148,6 +150,7 @@ def loop():
         print("What is the genome of the meme?")
         meme_genome = input()         
         RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
+
     elif command == "lc":
         print("Launch campain with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14
