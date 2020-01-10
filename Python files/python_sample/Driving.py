@@ -5,7 +5,7 @@ from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
 from averageString import getAverage
-#from zigbee import Zigbee
+from zigbee import Zigbee
 import Locations
 
 angle_tolerance = 2
@@ -25,7 +25,7 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
 
 # Connect Zigbee
-#ZIGBEE = Zigbee('COM20', 9600)
+ZIGBEE = Zigbee('COM20', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
@@ -44,19 +44,8 @@ def GetPosition(robotID):
                 return [xpos, ypos], angle
     return
 
-def GetPos():
-    global angle, pos
-
-    angle = round(angle,1)
-
-    if angle > 180:
-        angle = angle-360
-
-    return pos, angle
-
 def GetInstruction(RobotID, target):
     try:
-        #rob_pos, rob_angle = GetPos()
         rob_pos, rob_angle = GetPosition(RobotID)
     except:
         return "NULL"
@@ -88,7 +77,7 @@ def GetInstruction(RobotID, target):
 def SendInstruction(RobotID, instruction):
     ReveiverID = [5, 6][RobotID-1]
     print("Send Instruction: " + "1" + str(ReveiverID) + instruction)
-   # ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
+    ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
@@ -110,39 +99,11 @@ def GuideTo(RobotID, target):
             else:
                 print("Error retrieving instruction")
 
-        ### MOVE SIMULATOR ###
-        if endtime > time:
-            if instruction[0] == "F":
-                x = pos[0] + math.cos(math.radians(angle)) * speed
-                y = pos[1] + math.sin(math.radians(angle)) * speed
-                pos = [x, y]
-            elif instruction[0] == "L":
-                angle = angle + speed
-                if angle > 180:
-                    angle = angle - 360
-
-            elif instruction[0] == "R":
-                angle = angle - speed
-                if angle < -180:
-                    angle = angle + 360
-
-        time = time + delta_t
-
 # Init position
 RobotID = 1
 pos = [0, 0]
 angle = 0
 
-#target = [math.sqrt(0.5*1000**2) , math.sqrt(0.5*1000**2) ]
 target = [1000, 200]
 
-# try:
-#     rob_pos, rob_angle = GetPosition(RobotID)
-# except:
-#     print("error")
-
-#SendInstruction(1, "F0")
-
-#GuideTo(RobotID, target)
-
-print(Locations.Lab8)
+GuideTo(RobotID, target)
