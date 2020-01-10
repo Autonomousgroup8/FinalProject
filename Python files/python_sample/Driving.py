@@ -28,12 +28,12 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
 
 def GetPosition(robotID):
-    RQ1 = MemeSimCommand.RQ(8, robotID+21)
-    MEMESIM_CLIENT.send_command(RQ1)
+    RQ = MemeSimCommand.RQ(8, robotID+14)
+    MEMESIM_CLIENT.send_command(RQ)
 
     sleep(2.0)
 
-    resp = MEMESIM_CLIENT.new_responses()
+    resp = MEMESIM_CLIENT.new_responses()[0]
 
     if resp.cmdtype() == 'rq':
         if not resp.iserror():
@@ -42,7 +42,7 @@ def GetPosition(robotID):
             angle = int(float(resp.cmdargs()[4]))
             return [xpos, ypos], angle
 
-    return
+    return "Error"
 
 def GetPos():
     global angle, pos
