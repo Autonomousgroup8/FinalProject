@@ -84,7 +84,7 @@ def loop():
     global MY_MEMES
     error = 0
 
-    print("What do you want to do? (rq/mq/ip/mqip/pi/tm/gm/pc/lc/ca/db/rs/q/print_ind/litt/dump)")
+    print("What do you want to do? (rq/mq/ip/mqip/pi/tm/gm/pc/lc/ca/db/rs/q/print_ind/litt/save/read)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
