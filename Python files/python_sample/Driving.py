@@ -53,20 +53,20 @@ MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
 
 def GetPosition(robotID):
-    RQ1 = MemeSimCommand.RQ(8, robotID+21)
-    MEMESIM_CLIENT.send_command(RQ1)
+    RQ = MemeSimCommand.RQ(8, robotID+14)
+    MEMESIM_CLIENT.send_command(RQ)
 
     sleep(2.0)
 
-    resp = MEMESIM_CLIENT.new_responses()
+    RESPONSES = MEMESIM_CLIENT.new_responses()
 
-    if resp.cmdtype() == 'rq':
-        if not resp.iserror():
-            xpos = int(float(resp.cmdargs()[2]))
-            ypos = int(float(resp.cmdargs()[3]))
-            angle = int(float(resp.cmdargs()[4]))
-            return [xpos, ypos], angle
-
+    for resp in RESPONSES:
+        if resp.cmdtype() == 'rq':
+            if not resp.iserror():
+                xpos = int(float(resp.cmdargs()[2]))
+                ypos = int(float(resp.cmdargs()[3]))
+                angle = int(float(resp.cmdargs()[4]))
+                return [xpos, ypos], angle
     return
 
 def GetPos():
@@ -80,8 +80,11 @@ def GetPos():
     return pos, angle
 
 def GetInstruction(RobotID, target):
-    rob_pos, rob_angle = GetPos()
-    #rob_pos, rob_angle = GetPosition(RobotID)
+    try:
+        #rob_pos, rob_angle = GetPos()
+        rob_pos, rob_angle = GetPosition(RobotID)
+    except:
+        return "NULL"
 
     tar_angle = math.degrees(math.atan2(target[1] - rob_pos[1], target[0] - rob_pos[0])) - rob_angle
     tar_distance = math.sqrt((target[1] - rob_pos[1])**2 + (target[0] - rob_pos[0])**2)
@@ -121,11 +124,14 @@ def GuideTo(RobotID, target):
         if endtime + 1 < time:
             print([round(pos[0], 1), round(pos[1], 1)], round(angle, 1))
             instruction = GetInstruction(RobotID, target)
-            if instruction[0] == "F":
-                endtime = time + distances[int(instruction[-1:])] / 10
-            elif instruction[0] != "S":
-                endtime = time + angles[int(instruction[-1:])] / 10
-            SendInstruction(RobotID, instruction)
+            if instruction != "NULL":
+                if instruction[0] == "F":
+                    endtime = time + distances[int(instruction[-1:])] / 10
+                elif instruction[0] != "S":
+                    endtime = time + angles[int(instruction[-1:])] / 10
+                SendInstruction(RobotID, instruction)
+            else:
+                print("Error retrieving instruction")
 
         ### MOVE SIMULATOR ###
         if endtime > time:
@@ -153,6 +159,9 @@ angle = 0
 #target = [math.sqrt(0.5*1000**2) , math.sqrt(0.5*1000**2) ]
 target = [1000, 200]
 
-print(GetPosition(1))
+try:
+    rob_pos, rob_angle = GetPosition(RobotID)
+except:
+    print("error")
 
 #GuideTo(RobotID, target)
