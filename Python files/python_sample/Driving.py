@@ -41,7 +41,7 @@ def GetPosition(robotID):
             if not resp.iserror():
                 xpos = int(float(resp.cmdargs()[2]))
                 ypos = int(float(resp.cmdargs()[3]))
-                angle1 = int(float(resp.cmdargs()[4]))
+                angle1 = math.degrees(int(float(resp.cmdargs()[4])))
 
                 global angle, pos
                 angle = angle1
@@ -80,7 +80,7 @@ def GetInstruction(RobotID, target):
     return "NULL"
 
 def SendInstruction(RobotID, instruction):
-    ReveiverID = [5, 6][RobotID-1]
+    ReveiverID = [5, 5][RobotID-1]
     print("Send Instruction: " + "1" + str(ReveiverID) + instruction)
     ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
 
@@ -97,20 +97,20 @@ def GuideTo(RobotID, target):
             instruction = GetInstruction(RobotID, target)
             if instruction != "NULL":
                 if instruction[0] == "F":
-                    endtime = Time + distances[int(instruction[-1:])] / 10
+                    endtime = Time + distances[int(instruction[-1:])] / 30
                 elif instruction[0] != "S":
-                    endtime = Time + angles[int(instruction[-1:])] / 10
+                    endtime = Time + angles[int(instruction[-1:])] / 30
                 SendInstruction(RobotID, instruction)
             else:
                 print("Error retrieving instruction")
 
 # Init position
-RobotID = 1
+RobotID = 2
 pos = [0, 0]
 angle = 0
 
-target = Locations.Lab8
+target = [3000, 405]
 
-print(GetPosition(RobotID))
+#print(GetPosition(RobotID))
 
-#GuideTo(RobotID, target)
+GuideTo(RobotID, target)
