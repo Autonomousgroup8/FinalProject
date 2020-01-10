@@ -10,6 +10,8 @@ angle_tolerance = 2
 distance_tolerance = 10
 angles = [2, 5, 10, 15, 20, 30, 45, 90, 135, 180]
 distances = [20, 50, 100, 150, 200, 300, 400, 500, 750, 1000]
+
+# Locations
 Lab8 = [175, 1325]
 FunnelLabEuropa1 = [1450, 750]
 FunnelLabEuropa2 = [2150, 750]
@@ -40,16 +42,10 @@ MiddleAmerica = [750, 2750]
 delta_t = 0.001
 speed = 10*delta_t
 
-# set the simulator IP address
+# Server connection setup
 MEMESIM_IP_ADDR = "131.155.127.244"
-
-# set the team number here
 TEAM_NUMBER = 8
-
-# create a MemeSimClient object that takes car of all TCP communication with the simulator
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
-
-# connect to the simulator
 MEMESIM_CLIENT.connect()
 
 def GetPosition(robotID):
