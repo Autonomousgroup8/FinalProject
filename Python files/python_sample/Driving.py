@@ -5,6 +5,7 @@ from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
 from averageString import getAverage
+from zigbee import Zigbee
 
 angle_tolerance = 2
 distance_tolerance = 10
@@ -47,6 +48,8 @@ MEMESIM_IP_ADDR = "131.155.127.244"
 TEAM_NUMBER = 8
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
+
+ZIGBEE = Zigbee('COM6', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
@@ -108,6 +111,7 @@ def GetInstruction(RobotID, target):
 
 def SendInstruction(RobotID, instruction):
     print("Send Instruction: " + str(RobotID) + instruction)
+    ZIGBEE.write(bytes(str(RobotID) + instruction))
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
