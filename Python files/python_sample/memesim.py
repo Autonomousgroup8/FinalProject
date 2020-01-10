@@ -151,6 +151,7 @@ def loop():
         RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
     elif command == "q":
         exit()
+        
     elif command == "print_ind":
         print(CityIDGen)
         error = 1
