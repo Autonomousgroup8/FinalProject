@@ -18,7 +18,7 @@ TEAM_NUMBER = 8
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 
 # dictionary to hold a collection of memes
-MY_MEMES = dict()
+MY_MEMES = []
 
 sleep_length = 2.0
 
@@ -67,8 +67,9 @@ def process_response(resp):
 def loop():
     global CityIDGen
     global city
+    global MY_MEMES
     error = 0
-    print("What do you want to do? (rq/mq/ip/pi/tm/pc/lc/ca/db/rs/q/print_ind)")
+    print("What do you want to do? (rq/mq/ip/pi/tm/gm/pc/lc/ca/db/rs/q/print_ind/litt/dump)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
@@ -91,7 +92,23 @@ def loop():
         robotID = int(input())+14   
         print("Which person was interviewed?")
         individualID = input()
-        RQ1 = MemeSimCommand.PI(8, robotID, individualID)                    
+        RQ1 = MemeSimCommand.PI(8, robotID, individualID)
+    elif command == 'gm':
+        print("For which city do you want to generate a meme?")        
+        citynr = int(input())
+        print("What do you want to call the meme?")        
+        memename = input()
+        print("What protocol do you want to use?")        
+        protocol = int(input))
+        genomes_to_send = []
+        for i in range(len(CityIDGen)):
+            if CityIDGen[i][0] == citynr:
+                genomes_to_send += [CityIDGen[i][2]]
+        print(genomes_to_send)
+        averageGenome = getAverage(genomes_to_send)
+        print(averageGenome)
+        MY_MEMES += genomeprotocol(memename, protocol, averageGenome)
+        error = 1
     elif command == "tm":
         print("Test meme with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -144,18 +161,6 @@ def loop():
         error = 1
     elif command == "dump":
         print("Printing meme genome")
-        error = 1
-
-    elif command == "avg":
-        print("Welke stad?")
-        citynr = int(input())
-        genomes_to_send = []
-        for i in range(len(CityIDGen)):
-            if CityIDGen[i][0] == citynr:
-                genomes_to_send += [CityIDGen[i][2]]
-        print(genomes_to_send)
-        averageGenome = getAverage(genomes_to_send)
-        print(averageGenome)
         error = 1
     else:
         print("error")
