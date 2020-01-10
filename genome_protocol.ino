@@ -18,22 +18,22 @@ def genome_protocol(genome):
         while i < 100: 
             if meme[i] == 'A':
                 if(j == '\0'):
-                    meme = meme[:i] + 'T' # + meme[i:]
+                    meme = meme[:i] + 'T'
                 else:
                     meme = meme[:i] + 'T' + meme[j:]
             elif meme[i] == 'T':
                 if(j == '\0'):
-                    meme = meme[:i] + 'A' # + meme[i:]
+                    meme = meme[:i] + 'A'
                 else:
                     meme = meme[:i] + 'A' + meme[j:]
             elif meme[i] == 'C':
                 if(j == '\0'):
-                    meme = meme[:i] + 'G' # + meme[i:]
+                    meme = meme[:i] + 'G'
                 else:
                     meme = meme[:i] + 'G' + meme[j:]
             elif meme[i] == 'G':
                 if(j == '\0'):
-                    meme = meme[:i] + 'C' # + meme[i:]
+                    meme = meme[:i] + 'C'
                 else:
                     meme = meme[:i] + 'C' + meme[j:]
             i+=1
@@ -52,22 +52,22 @@ def genome_protocol(genome):
         while i < 100: 
             if meme[i] == 'A':
                 if(j == '\0'):
-                    meme = meme[:i] + 'C' # + meme[i:]
+                    meme = meme[:i] + 'C'
                 else:
                     meme = meme[:i] + 'C' + meme[j:]
             elif meme[i] == 'T':
                 if(j == '\0'):
-                    meme = meme[:i] + 'G' # + meme[i:]
+                    meme = meme[:i] + 'G'
                 else:
                     meme = meme[:i] + 'G' + meme[j:]
             elif meme[i] == 'C':
                 if(j == '\0'):
-                    meme = meme[:i] + 'A' # + meme[i:]
+                    meme = meme[:i] + 'A'
                 else:
                     meme = meme[:i] + 'A' + meme[j:]
             elif meme[i] == 'G':
                 if(j == '\0'):
-                    meme = meme[:i] + 'T' # + meme[i:]
+                    meme = meme[:i] + 'T'
                 else:
                     meme = meme[:i] + 'T' + meme[j:]
             i+=1
@@ -87,22 +87,22 @@ def genome_protocol(genome):
         while i < 100: 
             if meme[i] == 'A':
                 if(j == '\0'):
-                    meme = meme[:i] + 'G' # + meme[i:]
+                    meme = meme[:i] + 'G'
                 else:
                     meme = meme[:i] + 'G' + meme[j:]
             elif meme[i] == 'T':
                 if(j == '\0'):
-                    meme = meme[:i] + 'C' # + meme[i:]
+                    meme = meme[:i] + 'C'
                 else:
                     meme = meme[:i] + 'C' + meme[j:]
             elif meme[i] == 'C':
                 if(j == '\0'):
-                    meme = meme[:i] + 'T' # + meme[i:]
+                    meme = meme[:i] + 'T' 
                 else:
                     meme = meme[:i] + 'T' + meme[j:]
             elif meme[i] == 'G':
                 if(j == '\0'):
-                    meme = meme[:i] + 'A' # + meme[i:]
+                    meme = meme[:i] + 'A'
                 else:
                     meme = meme[:i] + 'A' + meme[j:]
             i+=1
