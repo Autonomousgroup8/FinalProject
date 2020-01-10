@@ -5,39 +5,14 @@ from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
 from averageString import getAverage
-from zigbee import Zigbee
+#from zigbee import Zigbee
+import Locations
 
 angle_tolerance = 2
 distance_tolerance = 10
 angles = [2, 5, 10, 15, 20, 30, 45, 90, 135, 180]
 distances = [20, 50, 100, 150, 200, 300, 400, 500, 750, 1000]
 
-# Locations
-Lab8 = [175, 1325]
-FunnelLabEuropa1 = [1450, 750]
-FunnelLabEuropa2 = [2150, 750]
-FunnelEuropaAfrica1 = [2750, 1250]
-FunnelEuropaAfrica2 = [2750, 1950]
-FunnelAfricaAmerica1 = [2150, 2750]
-FunnelAfricaAmerica2 = [1450, 2750]
-FunnelAmericaLab1 = [750, 1950]
-FunnelAmericaLab2 = [750, 1250]
-C01 = [2550, 250]
-C02 = [3250, 250]
-C03 = [3250, 950]
-C04 = [2250, 1250]
-C05 = [3250, 2550]
-C06 = [3250, 3250]
-C07 = [2550, 3250]
-C08 = [2250, 2250]
-C09 = [950, 3250]
-C10 = [250, 3250]
-C11 = [250, 2550]
-C12 = [1250, 2250]
-MiddleLabland = [750, 750]
-MiddleEurope = [2750, 750]
-MiddleAfrica = [2750, 2750]
-MiddleAmerica = [750, 2750]
 
 #MOVE SIM PARAM
 delta_t = 0.001
@@ -49,7 +24,8 @@ TEAM_NUMBER = 8
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
 
-ZIGBEE = Zigbee('COM20', 9600)
+# Connect Zigbee
+#ZIGBEE = Zigbee('COM20', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
@@ -112,7 +88,7 @@ def GetInstruction(RobotID, target):
 def SendInstruction(RobotID, instruction):
     ReveiverID = [5, 6][RobotID-1]
     print("Send Instruction: " + "1" + str(ReveiverID) + instruction)
-    ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
+   # ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
@@ -160,11 +136,13 @@ angle = 0
 #target = [math.sqrt(0.5*1000**2) , math.sqrt(0.5*1000**2) ]
 target = [1000, 200]
 
-#try:
-#    rob_pos, rob_angle = GetPosition(RobotID)
-#except:
-#    print("error")
+# try:
+#     rob_pos, rob_angle = GetPosition(RobotID)
+# except:
+#     print("error")
 
-SendInstruction(1, "F0")
+#SendInstruction(1, "F0")
 
 #GuideTo(RobotID, target)
+
+print(Locations.Lab8)
