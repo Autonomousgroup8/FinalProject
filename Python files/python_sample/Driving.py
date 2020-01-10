@@ -9,8 +9,8 @@ from averageString import getAverage
 from zigbee import Zigbee
 import Locations
 
-angle_tolerance = 2
-distance_tolerance = 10
+angle_tolerance = 3
+distance_tolerance = 100
 angles = [2, 5, 10, 15, 20, 30, 45, 90, 135, 180]
 distances = [20, 50, 100, 150, 200, 300, 400, 500, 750, 1000]
 
@@ -41,7 +41,7 @@ def GetPosition(robotID):
             if not resp.iserror():
                 xpos = int(float(resp.cmdargs()[2]))
                 ypos = int(float(resp.cmdargs()[3]))
-                angle1 = math.degrees(int(float(resp.cmdargs()[4])))
+                angle1 = math.degrees(float(resp.cmdargs()[4]))
 
                 global angle, pos
                 angle = angle1
@@ -57,6 +57,7 @@ def GetInstruction(RobotID, target):
 
     tar_angle = math.degrees(math.atan2(target[1] - rob_pos[1], target[0] - rob_pos[0])) - rob_angle
     tar_distance = math.sqrt((target[1] - rob_pos[1])**2 + (target[0] - rob_pos[0])**2)
+
 
     if tar_distance > distance_tolerance:
         if abs(tar_angle) > angle_tolerance:
@@ -97,9 +98,9 @@ def GuideTo(RobotID, target):
             instruction = GetInstruction(RobotID, target)
             if instruction != "NULL":
                 if instruction[0] == "F":
-                    endtime = Time + distances[int(instruction[-1:])] / 30
+                    endtime = Time + distances[int(instruction[-1:])] / 45
                 elif instruction[0] != "S":
-                    endtime = Time + angles[int(instruction[-1:])] / 30
+                    endtime = Time + angles[int(instruction[-1:])] / 25
                 SendInstruction(RobotID, instruction)
             else:
                 print("Error retrieving instruction")
@@ -109,7 +110,7 @@ RobotID = 2
 pos = [0, 0]
 angle = 0
 
-target = [3000, 405]
+target = Locations.C06
 
 #print(GetPosition(RobotID))
 
