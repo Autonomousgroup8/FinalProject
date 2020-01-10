@@ -4,10 +4,7 @@ def genome_protocol(genome):
     j=i
     nummer=input()
     if nummer == "1":
-        #hetzelfde blijven
         meme=genome
-   
-   
     elif nummer == "2":
         meme = genome
         if meme[0] == 'A':
@@ -41,8 +38,7 @@ def genome_protocol(genome):
                     meme = meme[:i] + 'C' + meme[j:]
             i+=1
             j=i
-            j+=1
-            
+            j+=1       
     elif nummer == "3":
         meme = genome
         if meme[0] == 'A':
@@ -78,7 +74,6 @@ def genome_protocol(genome):
             j=i
             j+=1
     
-            
     elif nummer == "4":
         meme = genome
         if meme[0] == 'A':
@@ -118,11 +113,7 @@ def genome_protocol(genome):
     global meme
   
     
-        
 genome="AAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAA"
-#genome="ACGTA"
-print("ik ben in de loop")
-print(genome)
 a=genome_protocol(genome)
 print(meme)
 
