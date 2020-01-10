@@ -41,6 +41,10 @@ def GetPosition(robotID):
                 xpos = int(float(resp.cmdargs()[2]))
                 ypos = int(float(resp.cmdargs()[3]))
                 angle = int(float(resp.cmdargs()[4]))
+
+                global angle, pos
+                angle = angle
+                pos = [xpos, ypos]
                 return [xpos, ypos], angle
     return
 
