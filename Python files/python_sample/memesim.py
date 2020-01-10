@@ -30,12 +30,12 @@ city = 1
 # you can put initialization code here
 def setup():
 
-    # create a collection of random memes
-    for i in range(0, 10):
-        mg = MemeGenome.random_meme_genome()
-        mg[0] = 'A'
-        mg[99] = mg[0]
-        MY_MEMES['Meme'+str(i)] = mg
+#    # create a collection of random memes
+#    for i in range(0, 10):
+#        mg = MemeGenome.random_meme_genome()
+#        mg[0] = 'A'
+#        mg[99] = mg[0]
+#        MY_MEMES['Meme'+str(i)] = mg
 
 
     # connect to the simulator
@@ -99,7 +99,7 @@ def loop():
         print("What do you want to call the meme?")        
         memename = input()
         print("What protocol do you want to use?")        
-        protocol = int(input))
+        protocol = int(input())
         genomes_to_send = []
         for i in range(len(CityIDGen)):
             if CityIDGen[i][0] == citynr:
