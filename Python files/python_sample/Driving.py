@@ -110,8 +110,9 @@ def GetInstruction(RobotID, target):
     return "NULL"
 
 def SendInstruction(RobotID, instruction):
-    print("Send Instruction: " + str(RobotID) + instruction)
-    ZIGBEE.write(bytes(str(RobotID) + instruction))
+    ReveiverID = [5, 6][RobotID-1]
+    print("Send Instruction: " + str(ReveiverID) + instruction)
+    ZIGBEE.write(bytes(str(ReveiverID) + instruction))
 
 def GuideTo(RobotID, target):
     global angle, pos ### MOVE SIMULATOR PARAM ###
@@ -159,9 +160,11 @@ angle = 0
 #target = [math.sqrt(0.5*1000**2) , math.sqrt(0.5*1000**2) ]
 target = [1000, 200]
 
-try:
-    rob_pos, rob_angle = GetPosition(RobotID)
-except:
-    print("error")
+#try:
+#    rob_pos, rob_angle = GetPosition(RobotID)
+#except:
+#    print("error")
+
+SendInstruction(1, "F0")
 
 #GuideTo(RobotID, target)
