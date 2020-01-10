@@ -5,6 +5,7 @@ from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
 from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
+from WriteGenome import *
 from averageString import getAverage
 # Global variables/constants that can be accessed from all functions should be defined below
 
@@ -80,6 +81,7 @@ def loop():
     global city
     global MY_MEMES
     error = 0
+
     print("What do you want to do? (rq/mq/ip/mqip/pi/tm/gm/pc/lc/ca/db/rs/q/print_ind/litt/dump)")
     command = input()
     if command == "rq":
@@ -181,8 +183,13 @@ def loop():
         testcmd = input()
         exec(testcmd)
         error = 1
-    elif command == "dump":
-        print("Printing meme genome")
+    elif command == "save":
+        print("Saving meme genome")
+        write_genome(CityIDGen)
+        error = 1
+    elif command == "read":
+        print("Reading meme genome")
+        read_genome(CityIDGen)
         error = 1
     else:
         print("error")
