@@ -77,7 +77,6 @@ def loop():
         print("For what group size?")
         group_size = int(input())
         RQ1 = MemeSimCommand.MQ(8, robotID, group_size)
-        print(RQ1.asstring)
     elif command == "ip":
         print("Interview person with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
