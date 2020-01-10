@@ -14,9 +14,7 @@ def read_genome(curr_meme):
     f = open("MemeStorage.txt","r")
     memes_read = f.read()
     f.close()
-    #print(memes_read)
     memes_split = memes_read.split(";")
-    #print(memes_split)
     memes_final = []
     for i in range(len(memes_split)-1):
         temp_meme = []
@@ -25,7 +23,15 @@ def read_genome(curr_meme):
         temp_meme += [temp_split[1]]
         temp_meme += [temp_split[2]]
         memes_final += [temp_meme]
-    total_memes = curr_meme + list(set(memes_final)-set(curr_meme))
-    write_genome(total_memes)
-    return total_memes
+
+    memes_final += curr_meme
+    new_list = []
+    for elem in memes_final:
+        if elem not in new_list:
+            new_list += [elem]
+
+
+
+    write_genome(memes_final)
+    return memes_final
 
