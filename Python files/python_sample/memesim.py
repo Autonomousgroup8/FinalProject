@@ -57,7 +57,7 @@ def process_response(resp):
             individualID = individualID_genome[0]
             genome = individualID_genome[1]
             CityIDGen += [[city, individualID, genome]]
-#            print(CityIDGen)
+#            print(CityIDGen)   
     print("Received response: " + str(resp))
 
 # this function is called over and over again
