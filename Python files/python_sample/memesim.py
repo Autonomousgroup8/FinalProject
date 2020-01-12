@@ -86,7 +86,7 @@ def genmeme(robotID, memename, protocol):
     global city    
     global MY_MEMES    
     for i in range(len(CityID)):
-        RQ1 = MemeSimCommand.PI(8, robotID, CityID[0][1])
+        RQ1 = MemeSimCommand.PI(8, robotID, CityID[i][1])
         MEMESIM_CLIENT.send_command(RQ1)
     sleep(sleep_length)#wait for responses
     RESPONSES = MEMESIM_CLIENT.new_responses()
@@ -102,6 +102,7 @@ def genmeme(robotID, memename, protocol):
     averageGenome = getAverage(genomes_to_send)
 #    print(averageGenome)
     MY_MEMES += [memename, genome_protocol(protocol, averageGenome)]
+    print(MY_MEMES)
 
         
 
@@ -189,7 +190,7 @@ def loop():
         individualID = input()        
         RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID)       
             
-    elif command == "pc":
+    elif command == "pc2":
         print("Process campaign with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
         print("What do you want to call the meme?")
@@ -197,7 +198,13 @@ def loop():
         print("What is the genome of the meme?")
         meme_genome = input()         
         RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
-
+    elif command == "pc2":
+        print("Process campaign with which robot? 1(henk)/2(ingrid)")
+        robotID = int(input())+14   
+        print("Which meme do you want to process?")
+        meme_name = input()
+        
+        RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
     elif command == "lc":
         print("Launch campain with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14

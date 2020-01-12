@@ -1,8 +1,8 @@
 def genome_protocol(protocol, genome):
     nummer=protocol
-    if nummer == "1":
-        meme=genome
-    elif nummer == "2":
+    meme=genome
+    
+    if nummer == "2":
         meme = genome
         if meme[0] == 'A':
             meme = 'T' + meme[2:]
@@ -105,7 +105,8 @@ def genome_protocol(protocol, genome):
             i+=1
             j=i
             j+=1
-            
+    elif nummer!=1:
+        print('protocol does not exist')        
     return meme
   
     
