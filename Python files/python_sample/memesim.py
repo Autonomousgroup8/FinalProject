@@ -69,7 +69,7 @@ def process_response(resp):
             group_size = int(float(resp.cmdargs()[2]))
             for i in range(group_size):
                 individualID+= [resp.cmdargs()[i+3]]
-                CityID += [[city, individualID[i][0]]] 
+                CityID += [city, [individualID[i]][0]] 
                 RQ1 = MemeSimCommand.IP(8, robot_id, individualID[i])
                 MEMESIM_CLIENT.send_command(RQ1) 
             print(CityID)                   
