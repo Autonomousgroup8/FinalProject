@@ -69,9 +69,12 @@ def process_response(resp):
             robot_id = int(float(resp.cmdargs()[1]))
             group_size = int(float(resp.cmdargs()[2]))
             for i in range(group_size):
-                individualID+= [resp.cmdargs()[i+3]]
-                CityID += [[city, [individualID[i]][0]]] 
-                RQ1 = MemeSimCommand.IP(8, robot_id, [individualID[i]][0])
+                if isinstance(resp.cmdargs()[i+3],list):    
+                    individualID+= [resp.cmdargs()[i+3][0]]
+                else:
+                    individualID+= [resp.cmdargs()[i+3]]
+                CityID += [[city, individualID[i]]] 
+                RQ1 = MemeSimCommand.IP(8, robot_id, individualID[i])
                 MEMESIM_CLIENT.send_command(RQ1) 
             print(CityID)                   
 #            print(CityIDGen)   
@@ -98,7 +101,7 @@ def genmeme(robotID, memename, protocol):
 #    print(genomes_to_send)
     averageGenome = getAverage(genomes_to_send)
 #    print(averageGenome)
-    MY_MEMES += genomeprotocol(memename, protocol, averageGenome)
+    MY_MEMES += [memename, genome_protocol(protocol, averageGenome)]
 
         
 
@@ -174,7 +177,7 @@ def loop():
         print(genomes_to_send)
         averageGenome = getAverage(genomes_to_send)
         print(averageGenome)
-        MY_MEMES += genomeprotocol(memename, protocol, averageGenome)
+        MY_MEMES += genome_protocol(protocol, averageGenome)
         error = 1
         
     elif command == "tm":
