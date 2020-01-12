@@ -25,7 +25,7 @@ MY_MEMES = []
 sleep_length = 2.0
 
 CityIDGen = []
-CityID = []
+CityID = [[1, '1911565'], [1, '1912289'], [1, '1911534'], [1, '1912141'], [1, '1911643']]
 city = 1
 # the setup function is called once at startup
 # you can put initialization code here
@@ -104,7 +104,30 @@ def genmeme(robotID, memename, protocol):
     MY_MEMES += [memename, genome_protocol(protocol, averageGenome)]
     print(MY_MEMES)
 
-        
+def genmemes(robotID, memename):
+    global CityIDGen
+    global CityID
+    global city    
+    global MY_MEMES    
+    for i in range(len(CityID)):
+        RQ1 = MemeSimCommand.PI(8, robotID, CityID[i][1])
+        MEMESIM_CLIENT.send_command(RQ1)
+    sleep(sleep_length)#wait for responses
+    RESPONSES = MEMESIM_CLIENT.new_responses()
+    # process new responses
+    for r in RESPONSES:
+        process_response(r)    
+    genomes_to_send = []
+    
+    for i in range(len(CityIDGen)):
+        if CityIDGen[i][0] == city:
+            genomes_to_send += [CityIDGen[i][2]]
+#    print(genomes_to_send)
+    averageGenome = getAverage(genomes_to_send)
+#    print(averageGenome)
+    for i in range(4):
+        MY_MEMES += [memename+str(i+1), genome_protocol(i+1, averageGenome)]
+    print(MY_MEMES)   
 
 
 # this function is called over and over again
@@ -164,6 +187,15 @@ def loop():
         genmeme(robotID, memename, protocol)
         error = 1
     
+    elif command == 'genmemes':
+        print("Process interview with which robot? 1(henk)/2(ingrid)")
+        robotID = int(input())+14           
+        print("For which city do you want to generate a meme?")        
+        city = int(input())
+        print("What do you want to call the meme?")        
+        memename = input()
+        genmemes(robotID, memename)
+        error = 1    
     elif command == 'gm':
         print("For which city do you want to generate a meme?")        
         citynr = int(input())
