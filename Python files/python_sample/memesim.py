@@ -69,12 +69,38 @@ def process_response(resp):
             group_size = int(float(resp.cmdargs()[2]))
             for i in range(group_size):
                 individualID+= [resp.cmdargs()[i+3]]
-                CityID += [[city, individualID[i][0]]] 
-                RQ1 = MemeSimCommand.IP(8, robot_id, individualID[i][0])
+                CityID += [[city, [individualID[i]][0]]] 
+                RQ1 = MemeSimCommand.IP(8, robot_id, [individualID[i]][0])
                 MEMESIM_CLIENT.send_command(RQ1) 
             print(CityID)                   
 #            print(CityIDGen)   
     print("Received response: " + str(resp))
+
+def genmeme(robotID, memename, protocol):
+    global CityIDGen
+    global CityID
+    global city    
+    global MY_MEMES    
+    for i in range(len(CityID)):
+        RQ1 = MemeSimCommand.PI(8, robotID, CityID[0][1])
+        MEMESIM_CLIENT.send_command(RQ1)
+    sleep(sleep_length)#wait for responses
+    RESPONSES = MEMESIM_CLIENT.new_responses()
+    # process new responses
+    for r in RESPONSES:
+        process_response(r)    
+    genomes_to_send = []
+    
+    for i in range(len(CityIDGen)):
+        if CityIDGen[i][0] == city:
+            genomes_to_send += [CityIDGen[i][2]]
+#    print(genomes_to_send)
+    averageGenome = getAverage(genomes_to_send)
+#    print(averageGenome)
+    MY_MEMES += genomeprotocol(memename, protocol, averageGenome)
+
+        
+
 
 # this function is called over and over again
 def loop():
@@ -90,18 +116,21 @@ def loop():
         print("location of which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
         RQ1 = MemeSimCommand.RQ(8, robotID)        
+        
     elif command == "mq": # need to store city number
         print("Query with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
         print("For what group size?")
         group_size = int(input())
         RQ1 = MemeSimCommand.MQ(8, robotID, group_size)
+        
     elif command == "ip":
         print("Interview person with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
         print("Which person do you want to interview?")
         individualID = int(float(input()))
         RQ1 = MemeSimCommand.IP(8, robotID, individualID)   
+        
     elif command == "mqip": # need to store city number
         print("Query and interview with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -117,6 +146,19 @@ def loop():
         print("Which person was interviewed?")
         individualID = input()
         RQ1 = MemeSimCommand.PI(8, robotID, individualID)
+    
+    elif command == 'genmeme':
+        print("Process interview with which robot? 1(henk)/2(ingrid)")
+        robotID = int(input())+14           
+        print("For which city do you want to generate a meme?")        
+        city = int(input())
+        print("What do you want to call the meme?")        
+        memename = input()
+        print("What protocol do you want to use?")        
+        protocol = int(input())
+        genmeme(robotID, memename, protocol)
+        error = 1
+    
     elif command == 'gm':
         print("For which city do you want to generate a meme?")        
         citynr = int(input())
@@ -141,7 +183,8 @@ def loop():
         meme_genome = input()        
         print("Which person do you want to test on?")
         individualID = input()        
-        RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID)                   
+        RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID)       
+            
     elif command == "pc":
         print("Process campaign with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
@@ -158,13 +201,16 @@ def loop():
         meme_name = input()
         print("What is the budget?")
         budget = input()         
-        RQ1 = MemeSimCommand.LC(8, robotID, meme_name, budget)                   
+        RQ1 = MemeSimCommand.LC(8, robotID, meme_name, budget)        
+           
     elif command == "ca":
-        RQ1 = MemeSimCommand.CA(8)                   
+        RQ1 = MemeSimCommand.CA(8)   
+                
     elif command == "db":
         print("What do you want to do? money/reset")
         debug_command = input()
-        RQ1 = MemeSimCommand.DB(8, debug_command)                   
+        RQ1 = MemeSimCommand.DB(8, debug_command)          
+         
     elif command == "rs":
         print("Set location of which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14
@@ -175,6 +221,7 @@ def loop():
         print("At what angle?")
         angle = input()
         RQ1 = MemeSimCommand.RS(8,robotID,x_pos,y_pos,angle)
+        
     elif command == "q":
         exit()
         
