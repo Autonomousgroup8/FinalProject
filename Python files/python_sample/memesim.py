@@ -7,6 +7,7 @@ from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
 from WriteGenome import *
 from averageString import getAverage
+from genomeprotocol import genome_protocol
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
