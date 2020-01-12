@@ -76,15 +76,6 @@ def process_response(resp):
 #            print(CityIDGen)   
     print("Received response: " + str(resp))
 
-def genmeme(robotID, citynr, memename, protocol):
-    global CityID
-    global CityIDgen
-    global MY_MEMES
-    
-    
-    
-    
-    
 # this function is called over and over again
 def loop():
     global CityIDGen
@@ -126,17 +117,6 @@ def loop():
         print("Which person was interviewed?")
         individualID = input()
         RQ1 = MemeSimCommand.PI(8, robotID, individualID)
-    elif command == "genmeme": # need to store city number
-        print("Generate meme with which robot? 1(henk)/2(ingrid)")
-        robotID = int(input())+14   
-        print("For which city do you want to generate a meme?")        
-        citynr = int(input())
-        print("What do you want to call the meme?")        
-        memename = input()
-        print("What protocol do you want to use?")        
-        protocol = int(input())
-        genmeme(robotID, citynr, memename, protocol)
-        error = 1     
     elif command == 'gm':
         print("For which city do you want to generate a meme?")        
         citynr = int(input())
