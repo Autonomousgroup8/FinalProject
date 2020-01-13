@@ -126,7 +126,7 @@ def genmemes(robotID, memename):
     averageGenome = getAverage(genomes_to_send)
 #    print(averageGenome)
     for i in range(4):
-        MY_MEMES += [memename+str(i+1), genome_protocol(i+1, averageGenome)]
+        MY_MEMES += [[memename+str(i+1), genome_protocol(i+1, averageGenome)]]
     print(MY_MEMES)   
 
 
