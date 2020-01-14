@@ -1,9 +1,6 @@
 import math as math
 import time
-from time import sleep
-from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
-from lib.memesimresponse import MemeSimResponse
 from lib.memesimclient import MemeSimClient
 from zigbee import Zigbee
 import Locations
@@ -27,7 +24,7 @@ def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
     MEMESIM_CLIENT.send_command(RQ)
 
-    sleep(1.0)
+    time.sleep(1.0)
 
     RESPONSES = MEMESIM_CLIENT.new_responses()
 
