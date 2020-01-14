@@ -79,9 +79,8 @@ def GetInstruction(RobotID, target):
 
 def SendInstruction(RobotID, instruction):
     ReveiverID = [5, 5][RobotID-1]
-    print("Send Instruction: " + "1" + str(ReveiverID) + instruction)
-    ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
-    simDriving(instruction)
+    print(f"Send Instruction: 1{ReveiverID}{instruction}\n")
+    ZIGBEE.write(bytes(f"Send Instruction: 1{ReveiverID}{instruction}", 'utf-8'))
 
 def GuideTo(RobotID, target):
     endtime = 0
