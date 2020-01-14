@@ -10,6 +10,8 @@ angle_tolerance = 2
 distance_tolerance = 50
 angles = [2, 5, 10, 15, 20, 30, 45, 90, 135, 180]
 distances = [20, 50, 100, 150, 200, 300, 400, 500, 750, 1000]
+angle_endtime = [0.025, 0.05, 0.1, 0.15, 0.25, 0.35, 0.5, 1.0, 1.5, 2.0]
+distance_endtime = [0.2, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 7.5, 10.0]
 
 # Server connection setup
 MEMESIM_IP_ADDR = "131.155.127.244"
@@ -90,9 +92,9 @@ def GuideTo(RobotID, target):
             instruction = GetInstruction(RobotID, target)
             if instruction[0] in ["F", "L", "R", "S"]:
                 if instruction[0] == "F":
-                    endtime = Time + distances[int(instruction[-1:])] / 45
+                    endtime = Time + distance_endtime[int(instruction[2])]
                 elif instruction[0] != "S":
-                    endtime = Time + angles[int(instruction[-1:])] / 25
+                    endtime = Time + angle_endtime[int(instruction[2])]
                 SendInstruction(RobotID, instruction)
             else:
                 print(instruction)
