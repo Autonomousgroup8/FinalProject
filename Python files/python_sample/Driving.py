@@ -18,6 +18,7 @@ MEMESIM_IP_ADDR = "131.155.127.244"
 TEAM_NUMBER = 8
 MEMESIM_CLIENT = MemeSimClient(MEMESIM_IP_ADDR, TEAM_NUMBER)
 MEMESIM_CLIENT.connect()
+print(" ")
 
 # Connect Zigbee
 ZIGBEE = Zigbee('COM20', 9600)
@@ -92,9 +93,9 @@ def GuideTo(RobotID, target):
             instruction = GetInstruction(RobotID, target)
             if instruction[0] in ["F", "L", "R", "S"]:
                 if instruction[0] == "F":
-                    endtime = Time + distance_endtime[int(instruction[2])]
+                    endtime = Time + distance_endtime[int(instruction[1])]
                 elif instruction[0] != "S":
-                    endtime = Time + angle_endtime[int(instruction[2])]
+                    endtime = Time + angle_endtime[int(instruction[1])]
                 SendInstruction(RobotID, instruction)
             else:
                 print(instruction)
