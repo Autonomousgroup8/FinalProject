@@ -1,3 +1,4 @@
+
 def genome_protocol(protocol, genome):
     nummer=protocol
     meme = list(genome)
@@ -34,8 +35,4 @@ def genome_protocol(protocol, genome):
     elif nummer!=1:
         print('protocol does not exist')        
     return "".join(meme)
-  
-    
-#genome="AAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAA"
-#a=genome_protocol(genome)
-#print(meme)
+
