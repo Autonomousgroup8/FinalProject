@@ -211,7 +211,7 @@ def loop():
 #        averageGenome = getAverage(genomes_to_send)
 #        print(averageGenome)
 #        MY_MEMES += genome_protocol(protocol, averageGenome)
-#        error = 1
+#        error = 1 bla
         
     elif command == "tm":
         found = False
