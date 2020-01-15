@@ -25,7 +25,7 @@ MY_MEMES = []
 sleep_length = 2.0
 
 CityIDGen = []
-CityID = [[1, '1911565'], [1, '1912289'], [1, '1911534'], [1, '1912141'], [1, '1911643']]
+CityID = []
 city = 1
 # the setup function is called once at startup
 # you can put initialization code here
@@ -64,7 +64,6 @@ def process_response(resp):
     if resp.cmdtype() == 'mq':
         if not resp.iserror():
             global CityID
-            CityID = []
             individualID = []
             robot_id = int(float(resp.cmdargs()[1]))
             group_size = int(float(resp.cmdargs()[2]))
@@ -138,7 +137,7 @@ def loop():
     global MY_MEMES
     error = 0
 
-    print("What do you want to do? (rq/mq/ip/mqip/pi/tm/gm/pc/lc/ca/db/rs/q/print_ind/litt/save/read)")
+    print("What do you want to do? (rq/mqip/genmeme/genmemes/tm/pc/lc/ca/db/rs/q/print_ind/litt/save/read)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
@@ -195,48 +194,59 @@ def loop():
         print("What do you want to call the meme?")        
         memename = input()
         genmemes(robotID, memename)
-        error = 1    
-    elif command == 'gm':
-        print("For which city do you want to generate a meme?")        
-        citynr = int(input())
-        print("What do you want to call the meme?")        
-        memename = input()
-        print("What protocol do you want to use?")        
-        protocol = int(input())
-        genomes_to_send = []
-        for i in range(len(CityIDGen)):
-            if CityIDGen[i][0] == citynr:
-                genomes_to_send += [CityIDGen[i][2]]
-        print(genomes_to_send)
-        averageGenome = getAverage(genomes_to_send)
-        print(averageGenome)
-        MY_MEMES += genome_protocol(protocol, averageGenome)
         error = 1
+#        
+#    elif command == 'gm':
+#        print("For which city do you want to generate a meme?")        
+#        citynr = int(input())
+#        print("What do you want to call the meme?")        
+#        memename = input()
+#        print("What protocol do you want to use?")        
+#        protocol = int(input())
+#        genomes_to_send = []
+#        for i in range(len(CityIDGen)):
+#            if CityIDGen[i][0] == citynr:
+#                genomes_to_send += [CityIDGen[i][2]]
+#        print(genomes_to_send)
+#        averageGenome = getAverage(genomes_to_send)
+#        print(averageGenome)
+#        MY_MEMES += genome_protocol(protocol, averageGenome)
+#        error = 1
         
     elif command == "tm":
         print("Test meme with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
-        print("What is the genome of the meme you want to test?")
-        meme_genome = input()        
+        print("Which meme?")
+        meme_name = input()
         print("Which person do you want to test on?")
-        individualID = input()        
-        RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID)       
-            
-    elif command == "pc2":
-        print("Process campaign with which robot? 1(henk)/2(ingrid)")
-        robotID = int(input())+14   
-        print("What do you want to call the meme?")
-        meme_name = input()
-        print("What is the genome of the meme?")
-        meme_genome = input()         
-        RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
-    elif command == "pc2":
-        print("Process campaign with which robot? 1(henk)/2(ingrid)")
-        robotID = int(input())+14   
-        print("Which meme do you want to process?")
-        meme_name = input()
+        individualID = input()            
+        for i in range(len(MY_MEMES)):
+            if MY_MEMES[i][0] == meme_name:
+                meme_genome = MY_MEMES[i][1]
+                found = true;
+        if found == true:
+            RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID) 
+        else:
+            print("That meme does not excist")
+            error = 1;
+        found = false;
         
-        RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
+    elif command == "pc":
+        print("Process campaign with which robot? 1(henk)/2(ingrid)")
+        robotID = int(input())+14   
+        print("Which meme?")
+        meme_name = input()
+        for i in range(len(MY_MEMES)):
+            if MY_MEMES[i][0] == meme_name:
+                meme_genome = MY_MEMES[i][1]
+                found = true;
+        if found == true:
+            RQ1 = MemeSimCommand.PC(8, robotID, meme_name, meme_genome)
+        else:
+            print("That meme does not excist")
+            error = 1;
+        found = false;
+        
     elif command == "lc":
         print("Launch campain with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14
