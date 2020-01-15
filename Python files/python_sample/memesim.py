@@ -9,6 +9,7 @@ from averageString import getAverage
 from genomeprotocol import genome_protocol
 from Driving import *
 import Locations
+import msvcrt
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
@@ -318,17 +319,17 @@ while True:
         process_response(r)
 
     # call the loop function
-    try:
-        user_input = sys.stdin.read()
-        if user_input:    
-            loop()
-            user_input = None
-        else:        
-            GuideTo(15, tr1)
-            GuideTo(16, tr2)
-    except IOerror:
-        pass
-    
+
+    user_input = sys.stdin.read()
+    if msvcrt.kbhit():  
+        loop()
+        user_input = None
+    else:        
+        GuideTo(15, tr1)
+        GuideTo(16, tr2)
+
+
+
     # slow the loop down
 
     sleep(sleep_length)
