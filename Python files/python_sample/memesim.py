@@ -1,5 +1,4 @@
 from time import sleep
-import sys
 # import code that is used
 from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
@@ -8,6 +7,8 @@ from lib.memesimclient import MemeSimClient
 from WriteGenome import *
 from averageString import getAverage
 from genomeprotocol import genome_protocol
+from Driving import *
+import Locations
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
@@ -27,6 +28,8 @@ sleep_length = 2.0
 CityIDGen = []
 CityID = []
 city = 1
+tr1 = Locations.C01
+tr2 = Locations.C02
 # the setup function is called once at startup
 # you can put initialization code here
 def setup():
@@ -318,7 +321,7 @@ while True:
     user_input = raw_input("press any key to enter command")
     if user_input:    
         loop()
-    else 
+    else:        
         GuideTo(15, tr1)
         GuideTo(16, tr2)
         
