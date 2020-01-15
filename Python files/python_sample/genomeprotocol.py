@@ -1,4 +1,6 @@
 def genome_protocol(genome):
+    global meme
+
     print("Which protocol do you want to run?")
     i=1
     j=i
@@ -109,10 +111,9 @@ def genome_protocol(genome):
             j=i
             j+=1
             
-    print(meme)
-    global meme
-  
-    
-genome="AAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAAAAAACCCCGGGGTTTTAAAA"
-a=genome_protocol(genome)
-print(meme)
+
+
+
+
+
+
