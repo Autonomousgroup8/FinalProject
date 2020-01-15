@@ -10,6 +10,7 @@ from genomeprotocol import genome_protocol
 from Driving import *
 import Locations
 import msvcrt
+
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
@@ -320,15 +321,15 @@ while True:
 
     # call the loop function
 
-    user_input = sys.stdin.read()
+
     if msvcrt.kbhit():  
         loop()
         user_input = None
     else:        
-        GuideTo(15, tr1)
-        GuideTo(16, tr2)
 
 
+        GuideTo(1, tr1)
+        GuideTo(2, tr2)
 
     # slow the loop down
 
