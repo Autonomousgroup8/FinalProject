@@ -30,8 +30,8 @@ sleep_length = 2.0
 CityIDGen = []
 CityID = []
 city = 1
-tr1 = Locations.C07
-tr2 = Locations.FunnelAfricaAmerica1
+tr1 = Locations.MiddleLabland
+tr2 = Locations.MiddleLabland
 
 
 # the setup function is called once at startup
@@ -327,8 +327,13 @@ while True:
         loop()
 
     else:
-        GuideTo(1, tr1)
-        GuideTo(2, tr2)
+        print("Input destination 1")
+        tr1 = input()
+        print("Input destination 2")
+        tr2 = input()
+
+        GuideTo(1, locDict[tr1])
+        GuideTo(2, locDict[tr2])
 
     # slow the loop down
 
