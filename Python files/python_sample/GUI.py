@@ -8,6 +8,9 @@ import Locations
 # lijst = compList(Tetris)
 # print(compList[0])
 class App:
+    def getValue(self, *args):
+        print(locvar.get())
+
 
     def __init__(self, master):
         global testText
@@ -76,14 +79,17 @@ class App:
         frame.commandChoice.grid(row=5, column=1, pady=2)
         testvar.set(commands[0])
 
+        global locvar
         locvar = StringVar(root)
         locations = ["Lab8", "FunnelLabEuropa1", "FunnelLabEuropa2", "FunnelEuropaAfrica1", "FunnelEuropaAfrica2", "FunnelAfricaAmerica1", "FunnelAfricaAmerica2", "FunnelAmericaLab1", "FunnelAmericaLab2", "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10", "C11", "C12", "MiddleLabland", "MiddleEurope", "MiddleAfrica", "MiddleAmerica"]
         frame.locChoice = OptionMenu(master, locvar, locations[0], *locations)
         frame.locChoice.grid(row=6, column=1, pady=2)
         locvar.set(locations[0])
+        global test
+        test = locvar.trace('w', self.getValue)
 
     def submit(self):
-        print("Te")
+        print(f"Coordinates")
 
     def add_conflict(self):
         print("Conflict added")
@@ -93,7 +99,8 @@ class App:
         exec(testcmd)
 
 
+
+
 root = Tk()
 app = App(root)
 root.mainloop()
-
