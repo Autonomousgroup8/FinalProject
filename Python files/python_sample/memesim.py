@@ -30,9 +30,10 @@ sleep_length = 2.0
 CityIDGen = []
 CityID = []
 city = 1
-tr1 = Locations.MiddleLabland
-tr2 = Locations.MiddleLabland
-
+global tr1
+global tr2
+tr1 = "Eindhoven"
+tr2 = "Eindhoven"
 
 # the setup function is called once at startup
 # you can put initialization code here
@@ -144,7 +145,7 @@ def loop():
     global MY_MEMES
     error = 0
 
-    print("What do you want to do? (rq/mqip/genmeme/genmemes/tm/pc/lc/ca/db/rs/q/print_ind/litt/save/read)")
+    print("What do you want to do? (rq/mqip/genmeme/genmemes/tm/pc/lc/ca/db/rs/quit/print_ind/litt/save/read/dest)")
     command = input()
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
@@ -283,7 +284,7 @@ def loop():
         angle = input()
         RQ1 = MemeSimCommand.RS(8, robotID, x_pos, y_pos, angle)
 
-    elif command == "q":
+    elif command == "quit":
         exit()
 
     elif command == "print_ind":
@@ -298,6 +299,11 @@ def loop():
         print("Saving meme genome")
         write_genome(CityIDGen)
         error = 1
+    elif command == "dest":
+        print("Input destination 1")
+        tr1 = input()
+        print("Input destination 2")
+        tr2 = input()
     elif command == "read":
         print("Reading meme genome")
         read_genome(CityIDGen)
@@ -327,11 +333,6 @@ while True:
         loop()
 
     else:
-        print("Input destination 1")
-        tr1 = input()
-        print("Input destination 2")
-        tr2 = input()
-
         GuideTo(1, locDict[tr1])
         GuideTo(2, locDict[tr2])
 
