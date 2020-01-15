@@ -9,6 +9,8 @@ from averageString import getAverage
 from genomeprotocol import genome_protocol
 from Driving import *
 import Locations
+
+
 # Global variables/constants that can be accessed from all functions should be defined below
 
 # set the simulator IP address
@@ -318,12 +320,13 @@ while True:
         process_response(r)
 
     # call the loop function
-    user_input = raw_input("press any key to enter command")
+
+    user_input = input("press any key to enter command")
     if user_input:    
         loop()
     else:        
-        GuideTo(15, tr1)
-        GuideTo(16, tr2)
+        GuideTo(1, tr1)
+        GuideTo(2, tr2)
         
     # slow the loop down
 

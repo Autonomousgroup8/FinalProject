@@ -21,7 +21,7 @@ MEMESIM_CLIENT.connect()
 print(" ")
 
 # Connect Zigbee
-ZIGBEE = Zigbee('COM9', 9600)
+ZIGBEE = Zigbee('COM20', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)
@@ -87,7 +87,7 @@ def GuideTo(RobotID, target):
     endtime = 0
     instruction = " "
 
-    while instruction[0] != "S":
+    if instruction[0] != "S":
         Time = time.time()
         if endtime + 1 < Time:
             instruction = GetInstruction(RobotID, target)
@@ -96,8 +96,6 @@ def GuideTo(RobotID, target):
                     endtime = Time + distance_endtime[int(instruction[1])]
                 elif instruction[0] != "S":
                     endtime = Time + angle_endtime[int(instruction[1])]*1.5
-                SendInstruction(RobotID, instruction)
-                SendInstruction(RobotID, instruction)
                 SendInstruction(RobotID, instruction)
             elif instruction == "ERROR: No Position":
                 SendInstruction(RobotID, "F2")
@@ -109,6 +107,6 @@ def GuideTo(RobotID, target):
 RobotID = 2
 target = Locations.Lab8
 
-print(GetPosition(RobotID))
+#print(GetPosition(RobotID))
 
-#GuideTo(RobotID, target)
+GuideTo(RobotID, target)
