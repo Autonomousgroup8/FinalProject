@@ -1,5 +1,5 @@
 from time import sleep
-
+import sys
 # import code that is used
 from lib.memegenome import MemeGenome
 from lib.memesimcommand import MemeSimCommand
@@ -315,7 +315,13 @@ while True:
         process_response(r)
 
     # call the loop function
-    loop()
+    user_input = raw_input("press any key to enter command")
+    if user_input:    
+        loop()
+    else 
+        GuideTo(15, tr1)
+        GuideTo(16, tr2)
+        
     # slow the loop down
 
     sleep(sleep_length)
