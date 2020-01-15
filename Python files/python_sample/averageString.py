@@ -1,5 +1,6 @@
 import collections as coll
-def getAverage(strings,length = 100):
+def getAverage(strings):
+    length = 100
     tempGen = ""
     mostCommonString = ""
     for j in range(length):
