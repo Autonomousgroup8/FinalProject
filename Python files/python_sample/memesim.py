@@ -100,7 +100,7 @@ def genmeme(robotID, memename, protocol):
 #    print(genomes_to_send)
     averageGenome = getAverage(genomes_to_send)
 #    print(averageGenome)
-    MY_MEMES += [memename, genome_protocol(protocol, averageGenome)]
+    MY_MEMES += [[memename, genome_protocol(protocol, averageGenome)]]
     print(MY_MEMES)
 
 def genmemes(robotID, memename):
@@ -214,6 +214,7 @@ def loop():
 #        error = 1
         
     elif command == "tm":
+        found = False
         print("Test meme with which robot? 1(henk)/2(ingrid)")
         robotID = int(input())+14   
         print("Which meme?")
@@ -223,13 +224,13 @@ def loop():
         for i in range(len(MY_MEMES)):
             if MY_MEMES[i][0] == meme_name:
                 meme_genome = MY_MEMES[i][1]
-                found = true;
-        if found == true:
+                found = True;
+        if found == True:
             RQ1 = MemeSimCommand.TM(8, robotID, meme_genome, individualID) 
         else:
             print("That meme does not excist")
             error = 1;
-        found = false;
+        found = False;
         
     elif command == "pc":
         print("Process campaign with which robot? 1(henk)/2(ingrid)")

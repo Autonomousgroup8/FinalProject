@@ -33,7 +33,7 @@ def genome_protocol(protocol, genome):
             elif meme[i] == 'G':
                 meme[i] = 'A'   
     elif nummer == 5:
-        for i in range(10,29):
+        for i in range(0,10):
             if meme[i] == 'A':
                 meme[i] = 'T'
             elif meme[i] == 'T':
@@ -42,7 +42,7 @@ def genome_protocol(protocol, genome):
                 meme[i] = 'G'
             elif meme[i] == 'G':
                 meme[i] = 'C'
-        for i in range(30,59):
+        for i in range(30,60):
             if meme[i] == 'A':
                 meme[i] = 'C'
             elif meme[i] == 'T':
@@ -51,7 +51,7 @@ def genome_protocol(protocol, genome):
                 meme[i] = 'A'
             elif meme[i] == 'G':
                 meme[i] = 'T'
-        for i in range(60,99):
+        for i in range(60,100):
             if meme[i] == 'A':
                 meme[i] = 'G'
             elif meme[i] == 'T':
