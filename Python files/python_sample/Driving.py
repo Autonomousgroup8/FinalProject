@@ -29,14 +29,14 @@ def GetPosition(robotID):
 
     time.sleep(1.0)
 
-    RESPONSES = MEMESIM_CLIENT.new_responses()
+    RESPONSES1 = MEMESIM_CLIENT.new_responses()
 
-    for resp in RESPONSES:
-        if resp.cmdtype() == 'rq':
-            if not resp.iserror():
-                xpos = int(float(resp.cmdargs()[2]))
-                ypos = int(float(resp.cmdargs()[3]))
-                angle = round(math.degrees(float(resp.cmdargs()[4])))
+    for resp1 in RESPONSES1:
+        if resp1.cmdtype() == 'rq':
+            if not resp1.iserror():
+                xpos = int(float(resp1.cmdargs()[2]))
+                ypos = int(float(resp1.cmdargs()[3]))
+                angle = round(math.degrees(float(resp1.cmdargs()[4])))
 
                 if abs(angle) > 180:
                     angle = angle - sign(angle) * 360
@@ -78,7 +78,7 @@ def GetInstruction(RobotID, target):
     return "ERROR: No Instruction"
 
 def SendInstruction(RobotID, instruction):
-    ReveiverID = [5, 5][RobotID-1]
+    ReveiverID = [6, 5][RobotID-1]
     print(f"Send Instruction: 1{ReveiverID}{instruction}\n")
     #ZIGBEE.write(bytes(f"Send Instruction: 1{ReveiverID}{instruction}", 'utf-8'))
     ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
@@ -104,9 +104,9 @@ def GuideTo(RobotID, target):
                 print(instruction)
 
 # Init position
-RobotID = 2
-target = Locations.Lab8
+#RobotID = 2
+#target = Locations.C02
 
 #print(GetPosition(RobotID))
 
-GuideTo(RobotID, target)
+#GuideTo(RobotID, target)
