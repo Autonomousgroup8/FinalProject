@@ -318,13 +318,17 @@ while True:
         process_response(r)
 
     # call the loop function
-    user_input = raw_input("press any key to enter command")
-    if user_input:    
-        loop()
-    else:        
-        GuideTo(15, tr1)
-        GuideTo(16, tr2)
-        
+    try:
+        user_input = sys.stdin.read()
+        if user_input:    
+            loop()
+            user_input = None
+        else:        
+            GuideTo(15, tr1)
+            GuideTo(16, tr2)
+    except IOerror:
+        pass
+    
     # slow the loop down
 
     sleep(sleep_length)
