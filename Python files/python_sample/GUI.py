@@ -1,7 +1,8 @@
 # import tkinter module
 from tkinter import *
 from tkinter.ttk import *
-
+from Driving import *
+import Locations
 
 # Tetris = compo("Tetris",0,23,[""])
 # lijst = compList(Tetris)
@@ -76,7 +77,7 @@ class App:
         testvar.set(commands[0])
 
         locvar = StringVar(root)
-        locations = ["Eindhoven", "London"]
+        locations = ["Lab8", "FunnelLabEuropa1", "FunnelLabEuropa2", "FunnelEuropaAfrica1", "FunnelEuropaAfrica2", "FunnelAfricaAmerica1", "FunnelAfricaAmerica2", "FunnelAmericaLab1", "FunnelAmericaLab2", "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10", "C11", "C12", "MiddleLabland", "MiddleEurope", "MiddleAfrica", "MiddleAmerica"]
         frame.locChoice = OptionMenu(master, locvar, locations[0], *locations)
         frame.locChoice.grid(row=6, column=1, pady=2)
         locvar.set(locations[0])
