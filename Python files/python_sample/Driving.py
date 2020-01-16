@@ -21,7 +21,7 @@ MEMESIM_CLIENT.connect()
 print(" ")
 
 # Connect Zigbee
-ZIGBEE = Zigbee('COM20', 9600)
+ZIGBEE = Zigbee('COM10', 9600)
 
 def GetPosition(robotID):
     RQ = MemeSimCommand.RQ(8, robotID+14)

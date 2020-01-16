@@ -1,4 +1,5 @@
 from time import sleep
+useZig = False
 import msvcrt
 # import code that is used
 from lib.memegenome import MemeGenome
@@ -8,7 +9,8 @@ from lib.memesimclient import MemeSimClient
 from WriteGenome import *
 from averageString import getAverage
 from genomeprotocol import genome_protocol
-from Driving import *
+if useZig:
+    from Driving import *
 #from Locations import *
 
 locDict = {
@@ -57,8 +59,7 @@ sleep_length = 2.0
 CityIDGen = []
 CityID = []
 city = 1
-global tr1
-global tr2
+
 tr1 = "Lab"
 tr2 = "Lab"
 
@@ -166,6 +167,8 @@ def genmemes(robotID, memename):
 
 # this function is called over and over again
 def loop():
+    global tr2
+    global tr1
     global CityIDGen
     global CityID
     global city
@@ -328,9 +331,9 @@ def loop():
         error = 1
     elif command == "dest":
         print("Input destination 1")
-        tr1 = input()
+        testTr = input()
         print("Input destination 2")
-        tr2 = input()
+        testTr = input()
         error = 1
     elif command == "read":
         print("Reading meme genome")
@@ -363,8 +366,9 @@ while True:
     else:
         print(locDict[tr1])
         print(locDict[tr2])
-        GuideTo(1, locDict[tr1])
-        GuideTo(2, locDict[tr2])
+        if useZig:
+            GuideTo(1, locDict[tr1])
+            GuideTo(2, locDict[tr2])
 
     # slow the loop down
 
