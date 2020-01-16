@@ -32,8 +32,8 @@ CityID = []
 city = 1
 global tr1
 global tr2
-tr1 = "Eindhoven"
-tr2 = "Eindhoven"
+tr1 = "Lab"
+tr2 = "Lab"
 
 # the setup function is called once at startup
 # you can put initialization code here
@@ -257,7 +257,7 @@ def loop():
         found = false;
 
     elif command == "lc":
-        print("Launch campain with which robot? 1(henk)/2(ingrid)")
+        print("Launch campaign with which robot? 1(henk)/2(ingrid)")
         robotID = int(input()) + 14
         print("What meme do you want to launch?")  # optie voor later: print lijst met alle memes
         meme_name = input()
