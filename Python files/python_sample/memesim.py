@@ -9,7 +9,34 @@ from WriteGenome import *
 from averageString import getAverage
 from genomeprotocol import genome_protocol
 from Driving import *
-import Locations
+#from Locations import *
+
+locDict = {
+"Lab" : [147, 1315],
+"Funnel1" : [1403, 736],
+"Funnel2" : [2130, 782],
+"Funnel3" : [2735, 1401],
+"Funnel4" : [2762, 2166],
+"Funnel5" : [2030, 2669],
+"Funnel6" : [1484, 2831],
+"Funnel7" : [762, 2121],
+"Funnel8" : [808, 1414],
+"C01" : [2546, 262],
+"C02" : [3275, 250],
+"C03" : [3269, 964],
+"C04" : [2250, 1270],
+"C05" : [3256, 2553],
+"C06" : [3244, 3242],
+"C07" : [2547, 3250],
+"C08" : [2250, 2250],
+"C09" : [950, 3250],
+"C10" : [250, 3250],
+"C11" : [250, 2550],
+"C12" : [1250, 2250],
+"MiddleLabland" : [750, 750],
+"MiddleEurope" : [2750, 750],
+"MiddleAfrica" : [2750, 2750],
+"MiddleAmerica" : [750, 2750]}
 
 # Global variables/constants that can be accessed from all functions should be defined below
 
@@ -304,6 +331,7 @@ def loop():
         tr1 = input()
         print("Input destination 2")
         tr2 = input()
+        error = 1
     elif command == "read":
         print("Reading meme genome")
         read_genome(CityIDGen)
@@ -333,6 +361,8 @@ while True:
         loop()
 
     else:
+        print(locDict[tr1])
+        print(locDict[tr2])
         GuideTo(1, locDict[tr1])
         GuideTo(2, locDict[tr2])
 
