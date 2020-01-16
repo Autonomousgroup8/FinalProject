@@ -167,6 +167,7 @@ def genmemes(robotID, memename):
 
 # this function is called over and over again
 def loop():
+    repeatCmd = False
     global tr2
     global tr1
     global CityIDGen
@@ -177,6 +178,10 @@ def loop():
 
     print("What do you want to do? (rq/mqip/genmeme/genmemes/tm/pc/lc/ca/db/rs/quit/print_ind/litt/save/read/dest)")
     command = input()
+    if "*" in command:
+        command = command.replace("*","")
+        repeatCmd = True
+
     if command == "rq":
         print("location of which robot? 1(henk)/2(ingrid)")
         robotID = int(input()) + 14
@@ -347,6 +352,9 @@ def loop():
     if error == 0:
         MEMESIM_CLIENT.send_command(RQ1)
 
+    if repeatCmd:
+        sleep(1.0)
+        loop()
 
 # call the setup function for initialization
 setup()
