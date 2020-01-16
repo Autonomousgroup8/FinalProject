@@ -1,5 +1,5 @@
 from time import sleep
-useZig = False
+useZig = True
 import msvcrt
 # import code that is used
 from lib.memegenome import MemeGenome
@@ -353,7 +353,11 @@ def loop():
         MEMESIM_CLIENT.send_command(RQ1)
 
     if repeatCmd:
-        sleep(1.0)
+        sleep(sleep_length)
+        RESPONSES = MEMESIM_CLIENT.new_responses()
+        # process new responses
+        for r in RESPONSES:
+            process_response(r)
         loop()
 
 # call the setup function for initialization
