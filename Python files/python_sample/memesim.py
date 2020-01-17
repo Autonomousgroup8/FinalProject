@@ -1,5 +1,8 @@
 from time import sleep
-useZig = True
+useZig = False
+if not useZig:
+    print("Caution! Zigbee is not turned on!")
+
 import msvcrt
 # import code that is used
 from lib.memegenome import MemeGenome
