@@ -29,14 +29,14 @@ def GetPosition(robotID):
 
     time.sleep(1.0)
 
-    RESPONSES = MEMESIM_CLIENT.new_responses()
+    RESPONSES1 = MEMESIM_CLIENT.new_responses()
 
-    for resp in RESPONSES:
-        if resp.cmdtype() == 'rq':
-            if not resp.iserror():
-                xpos = int(float(resp.cmdargs()[2]))
-                ypos = int(float(resp.cmdargs()[3]))
-                angle = round(math.degrees(float(resp.cmdargs()[4])))
+    for resp1 in RESPONSES1:
+        if resp1.cmdtype() == 'rq':
+            if not resp1.iserror():
+                xpos = int(float(resp1.cmdargs()[2]))
+                ypos = int(float(resp1.cmdargs()[3]))
+                angle = round(math.degrees(float(resp1.cmdargs()[4])))
 
                 if abs(angle) > 180:
                     angle = angle - sign(angle) * 360
@@ -78,7 +78,7 @@ def GetInstruction(RobotID, target):
     return "ERROR: No Instruction"
 
 def SendInstruction(RobotID, instruction):
-    ReveiverID = [5, 5][RobotID-1]
+    ReveiverID = [6, 5][RobotID-1]
     print(f"Send Instruction: 1{ReveiverID}{instruction}\n")
     #ZIGBEE.write(bytes(f"Send Instruction: 1{ReveiverID}{instruction}", 'utf-8'))
     ZIGBEE.write(bytes("1" + str(ReveiverID) + instruction, 'utf-8'))
@@ -87,7 +87,7 @@ def GuideTo(RobotID, target):
     endtime = 0
     instruction = " "
 
-    while instruction[0] != "S":
+    if instruction[0] != "S":
         Time = time.time()
         if endtime + 1 < Time:
             instruction = GetInstruction(RobotID, target)
@@ -97,8 +97,6 @@ def GuideTo(RobotID, target):
                 elif instruction[0] != "S":
                     endtime = Time + angle_endtime[int(instruction[1])]*1.5
                 SendInstruction(RobotID, instruction)
-                SendInstruction(RobotID, instruction)
-                SendInstruction(RobotID, instruction)
             elif instruction == "ERROR: No Position":
                 SendInstruction(RobotID, "F2")
                 print(f"{instruction}, Tunnel, forward 5 cm")
@@ -106,9 +104,9 @@ def GuideTo(RobotID, target):
                 print(instruction)
 
 # Init position
-RobotID = 2
-target = Locations.Lab8
+#RobotID = 2
+#target = Locations.C02
 
-print(GetPosition(RobotID))
+#print(GetPosition(RobotID))
 
 #GuideTo(RobotID, target)
